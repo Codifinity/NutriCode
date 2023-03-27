@@ -1,3 +1,4 @@
+```
 📦NutriCode
  ┣ 📂src
  ┃ ┣ 📂components
@@ -11,3 +12,4 @@
  ┣ 📜firebase.ts  -  baza danych
  ┣ 📜prettier.config.js  -  config prettiera
  ┗ 📜tsconfig.json  -  config typescript
+ ```
