@@ -130,7 +130,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 10,
     borderRadius: 10,
-    marginTop: 5
+    marginTop: 5,
+    fontSize: 20
   },
   buttonContainer: {
     width: '60%',
