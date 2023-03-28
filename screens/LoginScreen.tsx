@@ -123,6 +123,7 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         borderRadius: 10,
         marginTop: 5,
+        fontSize: 20
     },
     buttonContainer: {
         width: '60%',
