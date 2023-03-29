@@ -6,9 +6,10 @@ import { OFF } from 'openfoodfacts-nodejs';
 import { Camera } from 'expo-camera';
 import { useIsFocused } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
 
 const ScanScreen = () => {
-  const isFocused = useIsFocused();
+  const navigation = useNavigation();
   const [hasPermission, setHasPermission] = React.useState<boolean | null>(
     null
   );
@@ -29,7 +30,7 @@ const ScanScreen = () => {
     data: string;
   }) => {
     setScanned(true);
-    alert(`BarCode with type ${type} and data ${data} has been scanned`);
+    navigation.navigate('Product' as never, { type, data } as never);
   };
 
   if (hasPermission === null) {
