@@ -17,11 +17,7 @@ const Main = () => {
         component={HomeScreen}
         options={{ headerShown: false }}
       />
-      <Tab.Screen
-        name="Scan"
-        component={ScanScreen}
-        options={{ headerShown: false }}
-      />
+
       <Tab.Screen
         name="Products"
         component={ProductsScreen}

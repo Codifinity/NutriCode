@@ -5,15 +5,24 @@ import {
   View,
   Image,
   TextInput,
-  ScrollView
+  ScrollView,
+  Button
 } from 'react-native';
+import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import React from 'react';
 import { auth } from '../../firebase';
-import { useNavigation } from '@react-navigation/core';
+import type { RootStackParamList } from '..';
 
-const HomeScreen = () => {
-  const navigation = useNavigation();
+type HomeScreenNavigationProp = BottomTabNavigationProp<
+  RootStackParamList,
+  'Home'
+>;
 
+const HomeScreen = ({
+  navigation
+}: {
+  navigation: HomeScreenNavigationProp;
+}) => {
   const handleSignOut = () => {
     auth
       .signOut()
@@ -64,6 +73,7 @@ const HomeScreen = () => {
           </ScrollView>
         </View>
       </View>
+      <Button title="asd" onPress={() => navigation.navigate('Scan')} />
     </View>
   );
 };

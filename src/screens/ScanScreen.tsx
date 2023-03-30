@@ -1,19 +1,30 @@
 import * as React from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, View, BackHandler } from 'react-native';
 
 //modules
 import { OFF } from 'openfoodfacts-nodejs';
 import { Camera } from 'expo-camera';
 import { useIsFocused } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import type { RootStackParamList } from '..';
 
-const ScanScreen = () => {
-  const navigation = useNavigation();
+type ScanScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  'Scan'
+>;
+
+const ScanScreen = ({
+  navigation
+}: {
+  navigation: ScanScreenNavigationProp;
+}) => {
+  const isFocused = useIsFocused();
   const [hasPermission, setHasPermission] = React.useState<boolean | null>(
     null
   );
   const [scanned, setScanned] = React.useState(false);
+  const [productData, setProductData] = React.useState<string | null>(null);
 
   React.useEffect(() => {
     (async () => {
@@ -30,7 +41,7 @@ const ScanScreen = () => {
     data: string;
   }) => {
     setScanned(true);
-    navigation.navigate('Product' as never, { type, data } as never);
+    setProductData(data);
   };
 
   if (hasPermission === null) {
@@ -42,32 +53,29 @@ const ScanScreen = () => {
   }
 
   return (
-    <SafeAreaView
+    <View
       style={{
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center'
       }}
     >
-      <Camera
-        onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-        // style={StyleSheet.absoluteFillObject}
-        ratio="16:9"
-        zoom={0.2}
-        style={{
-          backgroundColor: 'red',
-          width: 200,
-          height: 200,
+      {isFocused && !scanned && productData === null ? (
+        <Camera
+          onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+          style={StyleSheet.absoluteFillObject}
+          ratio="16:9"
+          // zoom={0.2}
+        />
+      ) : null}
 
-          right: 0,
-          bottom: 0
-        }}
-      />
-
-      {scanned && (
-        <Button title={'Tap to scan again'} onPress={() => setScanned(false)} />
+      {scanned && productData !== null && (
+        <Button
+          title={'Tap to scan again'}
+          onPress={() => (setScanned(false), setProductData(null))}
+        />
       )}
-    </SafeAreaView>
+    </View>
   );
 };
 
