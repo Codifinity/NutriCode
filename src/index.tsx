@@ -2,9 +2,17 @@ import * as React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from './screens/LoginScreen';
 import Main from './screens/Main';
-import Product from './screens/Product';
+import ScanScreen from './screens/ScanScreen';
 
-const Stack = createNativeStackNavigator();
+export type RootStackParamList = {
+  Home: undefined;
+  Login: undefined;
+  Main: undefined;
+  Product: undefined;
+  Scan: undefined;
+};
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const Navigator = () => {
   return (
@@ -20,9 +28,9 @@ const Navigator = () => {
         component={Main}
       />
       <Stack.Screen
-        options={{ headerShown: false }}
-        name="Product"
-        component={Product}
+        name="Scan"
+        component={ScanScreen}
+        // options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );
