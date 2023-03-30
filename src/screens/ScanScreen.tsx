@@ -2,12 +2,13 @@ import * as React from 'react';
 import { Button, StyleSheet, Text, View, BackHandler } from 'react-native';
 
 //modules
-import { OFF } from 'openfoodfacts-nodejs';
+
 import { Camera } from 'expo-camera';
 import { useIsFocused } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '..';
+import Product from '../components/Product';
 
 type ScanScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -69,12 +70,7 @@ const ScanScreen = ({
         />
       ) : null}
 
-      {scanned && productData !== null && (
-        <Button
-          title={'Tap to scan again'}
-          onPress={() => (setScanned(false), setProductData(null))}
-        />
-      )}
+      {scanned && productData !== null && <Product productData={productData} />}
     </View>
   );
 };
