@@ -3,7 +3,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 //screens
 import HomeScreen from './HomeScreen';
-import ScanScreen from './ScanScreen';
 import ProductsScreen from './ProductsScreen';
 import ProfileScreen from './ProfileScreen';
 
