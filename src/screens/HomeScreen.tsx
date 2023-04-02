@@ -73,7 +73,9 @@ const HomeScreen = ({
           </ScrollView>
         </View>
       </View>
-      <Button title="asd" onPress={() => navigation.navigate('Scan')} />
+      <TouchableOpacity style={styles.scanProduct} onPress={() => navigation.navigate('Scan')}>
+        <Text style={styles.scanProductText}>Scan</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -174,5 +176,19 @@ const styles = StyleSheet.create({
   },
   productText: {
     fontSize: 20
+  },
+  scanProduct: {
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#4CA9EE",
+    paddingHorizontal: "8%",
+    paddingVertical: "3%",
+    borderRadius: 30,
+    position: "absolute",
+    bottom: 20
+  },
+  scanProductText: {
+    color: "white"
   }
 });
