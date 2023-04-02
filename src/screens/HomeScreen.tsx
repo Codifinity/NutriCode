@@ -73,9 +73,6 @@ const HomeScreen = ({
           </ScrollView>
         </View>
       </View>
-      <TouchableOpacity style={styles.scanProduct} onPress={() => navigation.navigate('Scan')}>
-        <Text style={styles.scanProductText}>Scan</Text>
-      </TouchableOpacity>
     </View>
   );
 };
@@ -89,7 +86,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   button: {
-    backgroundColor: '#238878',
+    backgroundColor: '#228572',
     width: '30%',
     padding: 10,
     borderRadius: 30,
@@ -178,17 +175,17 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   scanProduct: {
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#4CA9EE",
-    paddingHorizontal: "8%",
-    paddingVertical: "3%",
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#4CA9EE',
+    paddingHorizontal: '8%',
+    paddingVertical: '3%',
     borderRadius: 30,
-    position: "absolute",
+    position: 'absolute',
     bottom: 20
   },
   scanProductText: {
-    color: "white"
+    color: 'white'
   }
 });

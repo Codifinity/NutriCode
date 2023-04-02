@@ -1,4 +1,12 @@
-import { ActivityIndicator, StyleSheet, Text, View, Image, ScrollView, Pressable } from 'react-native';
+import {
+  ActivityIndicator,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  ScrollView,
+  Pressable
+} from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
 
@@ -24,20 +32,15 @@ interface ProductModel {
     proteins_100g: number;
     salt_100g: number;
   } | null;
-  // languages: Array<string>;
 }
 
-const Product = ({ productData }: { productData: string } ) => {
+const Product = ({ productData }: { productData: string }) => {
   const [product, setProduct] = React.useState<ProductModel | null>(null);
   const [isLoading, setisLoading] = React.useState(true);
 
   React.useEffect(() => {
     getProduct(productData);
   }, []);
-
-  React.useEffect(() => {
-    console.log(product);
-  }, [product]);
 
   const getProduct = async (productData: string) => {
     const url = `${baseUrl}${productData}.json`;
@@ -83,7 +86,7 @@ const Product = ({ productData }: { productData: string } ) => {
   };
 
   return (
-    <View>
+    <ScrollView style={{ flex: 1, marginBottom: 115 }}>
       {isLoading ? (
         <ActivityIndicator />
       ) : (
@@ -105,30 +108,68 @@ const Product = ({ productData }: { productData: string } ) => {
                   style={{ width: 154, height: 154 * (192 / 354) }}
                 />
               </View>
-              <ScrollView>
-                <Text style={styles.productItem}>kategorie: {product.categories}</Text>
+              <View>
+                <Text style={styles.productItem}>
+                  kategorie: {product.categories}
+                </Text>
                 <View style={styles.productDesc}>
-                  <Text style={styles.productDescItem}>Marka: {product.brands}</Text>
-                  <Text style={styles.productDescItem}>Skladniki: {product.ingredients_text}</Text>
-                  <Text style={styles.productDescItem}>NutriScore: {product.nutriscore_grade}</Text>
-                  <Text style={styles.productDescItem}>Wartosci odzywcze (w 100g):</Text>
-                  <Text style={styles.productDescItem}>Kalorie: {product.nutriments?.['energy-kcal_100g']}</Text>
-                  <Text style={styles.productDescItem}>Tluszcz: {product.nutriments?.fat_100g}g</Text>
                   <Text style={styles.productDescItem}>
-                    Weglowodany: {product.nutriments?.carbohydrates_100g}g
+                    Marka: {product.brands}
                   </Text>
-                  <Text style={styles.productDescItem}>Cukier: {product.nutriments?.sugars_100g}g</Text>
-                  <Text style={styles.productDescItem}>Bialko: {product.nutriments?.proteins_100g}g</Text>
-                  <Text style={styles.productDescItem}>Sol: {product.nutriments?.salt_100g}g</Text>
+                  <Text style={styles.productDescItem}>
+                    Skladniki: {product.ingredients_text}
+                  </Text>
+                  <View style={{ marginVertical: 15 }}>
+                    <Text style={{ fontWeight: 'bold', fontSize: 22 }}>
+                      Wartosci odżywcze
+                    </Text>
+                    <Text>W 100g</Text>
+                  </View>
+                  <Text style={styles.productDescItem}>
+                    Kalorie:{' '}
+                    {product.nutriments?.['energy-kcal_100g']
+                      ? product.nutriments?.['energy-kcal_100g']
+                      : 'Brak danych'}
+                  </Text>
+                  <Text style={styles.productDescItem}>
+                    Tluszcz:{' '}
+                    {product.nutriments?.fat_100g
+                      ? `${product.nutriments?.fat_100g}g`
+                      : 'Brak danych'}
+                  </Text>
+                  <Text style={styles.productDescItem}>
+                    Weglowodany:{' '}
+                    {product.nutriments?.carbohydrates_100g
+                      ? `${product.nutriments?.carbohydrates_100g}g`
+                      : 'Brak danych'}
+                  </Text>
+                  <Text style={styles.productDescItem}>
+                    Cukier:{' '}
+                    {product.nutriments?.sugars_100g
+                      ? `${product.nutriments?.sugars_100g}g`
+                      : 'Brak danych'}
+                  </Text>
+                  <Text style={styles.productDescItem}>
+                    Bialko:{' '}
+                    {product.nutriments?.proteins_100g
+                      ? `${product.nutriments?.proteins_100g}g`
+                      : 'Brak danych'}
+                  </Text>
+                  <Text style={styles.productDescItem}>
+                    Sol:{' '}
+                    {product.nutriments?.salt_100g
+                      ? `${product.nutriments?.salt_100g}g`
+                      : 'Brak danych'}
+                  </Text>
                 </View>
-              </ScrollView>
+              </View>
             </View>
           ) : (
             <Text>null</Text>
           )}
         </View>
       )}
-    </View>
+    </ScrollView>
   );
 };
 
@@ -136,28 +177,28 @@ export default Product;
 
 const styles = StyleSheet.create({
   titleBox: {
-    width: "100%",
-    marginHorizontal: "auto",
-    backgroundColor: "white",
+    width: '100%',
+    marginHorizontal: 'auto',
+    backgroundColor: 'white',
     height: 80,
     borderRadius: 30,
     flexDirection: 'column',
-    justifyContent: "center",
-    alignItems: "center"
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   title: {
     fontSize: 20,
-    fontWeight: "700"
+    fontWeight: '700'
   },
   productBox: {
-    backgroundColor: "white",
-    width: "95%"
+    backgroundColor: 'white',
+    width: '95%'
   },
   secondBox: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    width: "100%",
-    marginHorizontal: "auto",
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    width: '100%',
+    marginHorizontal: 'auto',
     marginTop: 20
   },
   productImage: {
@@ -166,34 +207,37 @@ const styles = StyleSheet.create({
     borderRadius: 30
   },
   productDesc: {
-    width: "100%",
+    width: '100%',
     paddingHorizontal: 15,
     marginTop: 20
   },
   productItem: {
     fontSize: 15,
-    fontWeight: "500",
+    fontWeight: '500',
     paddingHorizontal: 15,
     marginTop: 20
   },
   productDescItem: {
     fontSize: 15,
-    fontWeight: "500",
+    fontWeight: '500',
+    borderBottomColor: 'black',
+    borderBottomWidth: 0.5,
+    marginBottom: 5
   },
   closeButton: {
     width: 150,
     height: 50,
-    backgroundColor: "#EE564C",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: '#EE564C',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
     borderRadius: 40,
     marginHorizontal: 20,
     marginTop: 30
   },
   closeButtonText: {
-    color: "#E2E2E2",
+    color: '#E2E2E2',
     fontSize: 18,
-    fontWeight: "500"
+    fontWeight: '500'
   }
 });
