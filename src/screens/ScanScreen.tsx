@@ -1,25 +1,13 @@
 import * as React from 'react';
-import { Button, StyleSheet, Text, View, BackHandler } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 //modules
-
 import { Camera } from 'expo-camera';
 import { useIsFocused } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import type { RootStackParamList } from '..';
 import Product from '../components/Product';
 
-type ScanScreenNavigationProp = NativeStackNavigationProp<
-  RootStackParamList,
-  'Scan'
->;
-
-const ScanScreen = ({
-  navigation
-}: {
-  navigation: ScanScreenNavigationProp;
-}) => {
+const ScanScreen = () => {
   const isFocused = useIsFocused();
   const [hasPermission, setHasPermission] = React.useState<boolean | null>(
     null
@@ -34,13 +22,14 @@ const ScanScreen = ({
     })();
   }, []);
 
-  const handleBarCodeScanned = ({
-    type,
-    data
-  }: {
-    type: string;
-    data: string;
-  }) => {
+  React.useEffect(() => {
+    if (!isFocused) {
+      setScanned(false);
+      setProductData(null);
+    }
+  }, [isFocused]);
+
+  const handleBarCodeScanned = ({ data }: { type: string; data: string }) => {
     setScanned(true);
     setProductData(data);
   };
@@ -54,7 +43,7 @@ const ScanScreen = ({
   }
 
   return (
-    <View
+    <SafeAreaView
       style={{
         flex: 1,
         alignItems: 'center',
@@ -64,17 +53,31 @@ const ScanScreen = ({
       {isFocused && !scanned && productData === null ? (
         <Camera
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-          style={StyleSheet.absoluteFillObject}
+          style={{
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: 'black',
+            ...StyleSheet.absoluteFillObject
+          }}
           ratio="16:9"
           // zoom={0.2}
-        />
+        >
+          <View
+            style={{
+              width: 200,
+              height: 200,
+              borderColor: '#ffffff',
+              borderWidth: 5,
+              borderRadius: 20,
+              opacity: 1
+            }}
+          ></View>
+        </Camera>
       ) : null}
 
       {scanned && productData !== null && <Product productData={productData} />}
-    </View>
+    </SafeAreaView>
   );
 };
 
 export default ScanScreen;
-
-const styles = StyleSheet.create({});

@@ -39,23 +39,23 @@ const HomeScreen = ({
         <Text style={styles.logoText}>NutriCode</Text>
       </View>
       <View style={styles.userBox}>
-        <Text style={styles.userBoxText}>Hello, {auth.currentUser?.email}</Text>
+        <Text style={styles.userBoxText}>Cześć, {auth.currentUser?.email}</Text>
         <TouchableOpacity onPress={handleSignOut} style={styles.button}>
           <Text style={styles.buttonText}>Sign out</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.section}>
-        <Text style={styles.headers}>Search: </Text>
+        <Text style={styles.headers}>Wyszukaj produkt: </Text>
         <View style={styles.searchBox}>
           <Image source={require('../../assets/SearchIcon.png')} />
           <TextInput
-            placeholder="Enter name of product..."
+            placeholder="Wpisz nazwę produktu..."
             style={styles.searchInput}
           />
         </View>
       </View>
       <View style={styles.section}>
-        <Text style={styles.headers}>Your last products: </Text>
+        <Text style={styles.headers}>Twoje ostatnie produkty: </Text>
         <View style={styles.productBox}>
           <ScrollView style={{ width: '100%' }}>
             <View style={styles.product}>
@@ -73,9 +73,6 @@ const HomeScreen = ({
           </ScrollView>
         </View>
       </View>
-      <TouchableOpacity style={styles.scanProduct} onPress={() => navigation.navigate('Scan')}>
-        <Text style={styles.scanProductText}>Scan</Text>
-      </TouchableOpacity>
     </View>
   );
 };
@@ -89,7 +86,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   button: {
-    backgroundColor: '#238878',
+    backgroundColor: '#228572',
     width: '30%',
     padding: 10,
     borderRadius: 30,
@@ -178,17 +175,17 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   scanProduct: {
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#4CA9EE",
-    paddingHorizontal: "8%",
-    paddingVertical: "3%",
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#4CA9EE',
+    paddingHorizontal: '8%',
+    paddingVertical: '3%',
     borderRadius: 30,
-    position: "absolute",
+    position: 'absolute',
     bottom: 20
   },
   scanProductText: {
-    color: "white"
+    color: 'white'
   }
 });
