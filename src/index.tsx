@@ -27,11 +27,6 @@ const Navigator = () => {
         name="Main"
         component={Main}
       />
-      <Stack.Screen
-        name="Scan"
-        component={ScanScreen}
-        // options={{ headerShown: false }}
-      />
     </Stack.Navigator>
   );
 };
