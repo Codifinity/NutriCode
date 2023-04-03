@@ -6,6 +6,7 @@ import { Camera } from 'expo-camera';
 import { useIsFocused } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Product from '../components/Product';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ScanScreen = () => {
   const isFocused = useIsFocused();
@@ -29,7 +30,30 @@ const ScanScreen = () => {
     }
   }, [isFocused]);
 
-  const handleBarCodeScanned = ({ data }: { type: string; data: string }) => {
+  const handleBarCodeScanned = async ({
+    data
+  }: {
+    type: string;
+    data: string;
+  }) => {
+    try {
+      const storageData = await AsyncStorage.getItem('lastProducts');
+      if (storageData !== null) {
+        const dataArr = JSON.parse(storageData);
+        if (dataArr.some((item: string) => item === data)) {
+        } else {
+          dataArr.push(data);
+        }
+
+        await AsyncStorage.setItem('lastProducts', JSON.stringify(dataArr));
+        console.log(await AsyncStorage.getItem('lastProducts'));
+      } else {
+        const dataArr = [];
+        dataArr.push(data);
+        await AsyncStorage.setItem('lastProducts', JSON.stringify(dataArr));
+        console.log(await AsyncStorage.getItem('lastProducts'));
+      }
+    } catch (e) {}
     setScanned(true);
     setProductData(data);
   };

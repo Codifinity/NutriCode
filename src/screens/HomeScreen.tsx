@@ -1,15 +1,6 @@
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  Image,
-  TextInput,
-  ScrollView,
-  Button
-} from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
-import React from 'react';
+import * as React from 'react';
 import { auth } from '../../firebase';
 import type { RootStackParamList } from '..';
 
@@ -44,34 +35,12 @@ const HomeScreen = ({
           <Text style={styles.buttonText}>Sign out</Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.section}>
-        <Text style={styles.headers}>Wyszukaj produkt: </Text>
-        <View style={styles.searchBox}>
-          <Image source={require('../../assets/SearchIcon.png')} />
-          <TextInput
-            placeholder="Wpisz nazwę produktu..."
-            style={styles.searchInput}
-          />
-        </View>
-      </View>
-      <View style={styles.section}>
-        <Text style={styles.headers}>Twoje ostatnie produkty: </Text>
-        <View style={styles.productBox}>
-          <ScrollView style={{ width: '100%' }}>
-            <View style={styles.product}>
-              <Text style={styles.productText}>Name of product</Text>
-            </View>
-            <View style={styles.product}>
-              <Text style={styles.productText}>Name of product</Text>
-            </View>
-            <View style={styles.product}>
-              <Text style={styles.productText}>Name of product</Text>
-            </View>
-            <View style={styles.product}>
-              <Text style={styles.productText}>Name of product</Text>
-            </View>
-          </ScrollView>
-        </View>
+
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text style={{ textAlign: 'center', fontSize: 20 }}>
+          Aby zeskanować wybrany kod kreskowy produktu - naciśnij zielony
+          przycisk na dole ekranu
+        </Text>
       </View>
     </View>
   );
