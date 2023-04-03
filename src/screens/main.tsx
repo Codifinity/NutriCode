@@ -5,10 +5,11 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 //screens
 import HomeScreen from './HomeScreen';
 import ProductsScreen from './ProductsScreen';
-import ProfileScreen from './ProfileScreen';
+import ProfileScreen from './AboutScreen';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import type { GestureResponderEvent } from 'react-native';
 import ScanScreen from './ScanScreen';
+import AboutScreen from './AboutScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -110,8 +111,8 @@ const Main = () => {
         }}
       />
       <Tab.Screen
-        name="Profile"
-        component={ProfileScreen}
+        name="About"
+        component={AboutScreen}
         options={{
           headerShown: false,
           tabBarIcon: ({ focused }) => (
@@ -122,7 +123,7 @@ const Main = () => {
               }}
             >
               <Image
-                source={require('../../assets/user.png')}
+                source={require('../../assets/about.png')}
                 resizeMode="contain"
                 style={{
                   width: 30,
@@ -133,7 +134,7 @@ const Main = () => {
               <Text
                 style={{ color: focused ? '#228572' : '#2F455C', fontSize: 12 }}
               >
-                PROFILE
+                ABOUT
               </Text>
             </View>
           )

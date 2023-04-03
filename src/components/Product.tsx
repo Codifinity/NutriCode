@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const baseUrl = 'https://pl.openfoodfacts.org/api/v0/product/';
 const nutriSCoreImage =
@@ -68,7 +69,7 @@ const Product = ({ productData }: { productData: string }) => {
           image_url: product.image_url,
           categories: product.categories
             ? product.categories
-            : 'Brak kategorii',
+            : 'Brak informacji o kategorii',
           brands: product.brands ? product.brands : 'Brak informacji o marce',
           nutriscore_grade: product.nutriscore_grade
             ? product.nutriscore_grade
@@ -94,13 +95,24 @@ const Product = ({ productData }: { productData: string }) => {
           {product !== null ? (
             <View>
               <View style={styles.titleBox}>
-                <Text style={styles.title}>{product.product_name}</Text>
+                <Text style={styles.title}>
+                  {product.product_name
+                    ? product.product_name
+                    : 'Nie znaleziono'}
+                </Text>
               </View>
               <View style={styles.secondBox}>
-                <Image
-                  source={{ uri: product.image_url }}
-                  style={styles.productImage}
-                />
+                {product.image_url ? (
+                  <Image
+                    source={{ uri: product.image_url }}
+                    style={styles.productImage}
+                  />
+                ) : (
+                  <Image
+                    source={require('../../assets/noImage.jpg')}
+                    style={styles.productImage}
+                  />
+                )}
                 <Image
                   source={{
                     uri: `${nutriSCoreImage}${product.nutriscore_grade}.png`
@@ -108,21 +120,36 @@ const Product = ({ productData }: { productData: string }) => {
                   style={{ width: 154, height: 154 * (192 / 354) }}
                 />
               </View>
-              <View>
-                <Text style={styles.productItem}>
-                  kategorie: {product.categories}
-                </Text>
+              <View style={{ paddingHorizontal: 15 }}>
+                <View style={styles.headingContainer}>
+                  <Text style={styles.heading}>Kategorie</Text>
+                </View>
+                <View style={styles.headingContent}>
+                  <Text style={styles.headingContentText}>
+                    {product.categories}
+                  </Text>
+                </View>
+                <View style={styles.headingContainer}>
+                  <Text style={styles.heading}>Marka</Text>
+                </View>
+                <View style={styles.headingContent}>
+                  <Text style={styles.headingContentText}>
+                    {product.brands}
+                  </Text>
+                </View>
+                <View style={styles.headingContainer}>
+                  <Text style={styles.heading}>Składniki</Text>
+                </View>
+                <View style={styles.headingContent}>
+                  <Text style={styles.headingContentText}>
+                    {product.ingredients_text
+                      ? product.ingredients_text
+                      : 'Brak informacji o składnikach'}
+                  </Text>
+                </View>
                 <View style={styles.productDesc}>
-                  <Text style={styles.productDescItem}>
-                    Marka: {product.brands}
-                  </Text>
-                  <Text style={styles.productDescItem}>
-                    Skladniki: {product.ingredients_text}
-                  </Text>
-                  <View style={{ marginVertical: 15 }}>
-                    <Text style={{ fontWeight: 'bold', fontSize: 22 }}>
-                      Wartosci odżywcze
-                    </Text>
+                  <View style={styles.headingContainer}>
+                    <Text style={styles.heading}>Wartości odżywcze</Text>
                     <Text>W 100g</Text>
                   </View>
                   <Text style={styles.productDescItem}>
@@ -132,13 +159,13 @@ const Product = ({ productData }: { productData: string }) => {
                       : 'Brak danych'}
                   </Text>
                   <Text style={styles.productDescItem}>
-                    Tluszcz:{' '}
+                    Tłuszcz:{' '}
                     {product.nutriments?.fat_100g
                       ? `${product.nutriments?.fat_100g}g`
                       : 'Brak danych'}
                   </Text>
                   <Text style={styles.productDescItem}>
-                    Weglowodany:{' '}
+                    Węglowodany:{' '}
                     {product.nutriments?.carbohydrates_100g
                       ? `${product.nutriments?.carbohydrates_100g}g`
                       : 'Brak danych'}
@@ -150,13 +177,13 @@ const Product = ({ productData }: { productData: string }) => {
                       : 'Brak danych'}
                   </Text>
                   <Text style={styles.productDescItem}>
-                    Bialko:{' '}
+                    Białko:{' '}
                     {product.nutriments?.proteins_100g
                       ? `${product.nutriments?.proteins_100g}g`
                       : 'Brak danych'}
                   </Text>
                   <Text style={styles.productDescItem}>
-                    Sol:{' '}
+                    Sól:{' '}
                     {product.nutriments?.salt_100g
                       ? `${product.nutriments?.salt_100g}g`
                       : 'Brak danych'}
@@ -165,7 +192,17 @@ const Product = ({ productData }: { productData: string }) => {
               </View>
             </View>
           ) : (
-            <Text>null</Text>
+            <SafeAreaView
+              style={{
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}
+            >
+              <Text style={{ fontWeight: '700', fontSize: 22 }}>
+                Nie odnaleziono produktu!
+              </Text>
+            </SafeAreaView>
           )}
         </View>
       )}
@@ -176,6 +213,23 @@ const Product = ({ productData }: { productData: string }) => {
 export default Product;
 
 const styles = StyleSheet.create({
+  headingContentText: {
+    fontWeight: '500'
+  },
+  headingContent: {
+    borderRadius: 5,
+    backgroundColor: '#FFF',
+    paddingVertical: 10,
+    paddingHorizontal: 5
+  },
+  headingContainer: {
+    marginVertical: 10
+  },
+  heading: {
+    fontWeight: 'bold',
+    fontSize: 22,
+    color: '#228572'
+  },
   titleBox: {
     width: '100%',
     marginHorizontal: 'auto',
@@ -208,13 +262,11 @@ const styles = StyleSheet.create({
   },
   productDesc: {
     width: '100%',
-    paddingHorizontal: 15,
     marginTop: 20
   },
   productItem: {
     fontSize: 15,
     fontWeight: '500',
-    paddingHorizontal: 15,
     marginTop: 20
   },
   productDescItem: {

@@ -39,23 +39,23 @@ const HomeScreen = ({
         <Text style={styles.logoText}>NutriCode</Text>
       </View>
       <View style={styles.userBox}>
-        <Text style={styles.userBoxText}>Hello, {auth.currentUser?.email}</Text>
+        <Text style={styles.userBoxText}>Cześć, {auth.currentUser?.email}</Text>
         <TouchableOpacity onPress={handleSignOut} style={styles.button}>
           <Text style={styles.buttonText}>Sign out</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.section}>
-        <Text style={styles.headers}>Search: </Text>
+        <Text style={styles.headers}>Wyszukaj produkt: </Text>
         <View style={styles.searchBox}>
           <Image source={require('../../assets/SearchIcon.png')} />
           <TextInput
-            placeholder="Enter name of product..."
+            placeholder="Wpisz nazwę produktu..."
             style={styles.searchInput}
           />
         </View>
       </View>
       <View style={styles.section}>
-        <Text style={styles.headers}>Your last products: </Text>
+        <Text style={styles.headers}>Twoje ostatnie produkty: </Text>
         <View style={styles.productBox}>
           <ScrollView style={{ width: '100%' }}>
             <View style={styles.product}>
