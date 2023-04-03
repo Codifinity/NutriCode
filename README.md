@@ -19,7 +19,7 @@
 
 NutriCode to aplikacja służąca do skanowania kodów kreskowych produktów w celu uzyskania dodatkowych informacji na ich temat. Aplikacja została wykonana w React native z użyciem expo-cli
 
-## How to run app?
+## Jak uruchomić aplikację NutriCode?
 
 Należy ściągnąć repo z kodem aplikacji i otworzyć terminal w lokalizacji z aplikacją. Następnie trzeba wykonać poniższe kroki: 
 
