@@ -252,7 +252,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     width: '100%',
-    marginHorizontal: 'auto',
     marginTop: 20
   },
   productImage: {

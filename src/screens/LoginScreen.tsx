@@ -63,9 +63,9 @@ const LoginScreen = () => {
           <Text style={styles.logoText}>NutriCode</Text>
         </View>
         <Text style={styles.describe}>
-          Fill in the fields below. If you are here for the first time, after
-          filling in the fields, press the register button. If you want to log
-          in - press login
+            Wypełnij poniższe pola. Jeśli jesteś tu po raz pierwszy, po
+           wypełnieniu pól, naciśnij przycisk zarejestruj. Jeśli chcesz się zalogować
+           - naciśnij zaloguj
         </Text>
         <TextInput
           placeholder="Email"
@@ -84,13 +84,13 @@ const LoginScreen = () => {
 
       <View style={styles.buttonContainer}>
         <TouchableOpacity onPress={handleLogin} style={styles.button}>
-          <Text style={styles.buttonText}>Login</Text>
+          <Text style={styles.buttonText}>Zaloguj się</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={handleSignUp}
           style={[styles.button, styles.buttonOutline]}
         >
-          <Text style={styles.buttonOutlineText}>Register</Text>
+          <Text style={styles.buttonOutlineText}>Zarejestruj się</Text>
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
