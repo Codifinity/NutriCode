@@ -9,12 +9,12 @@ import 'firebase/compat/firestore';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyD6m3U3QUZMy3kWKOgjUaiMN2Qj5ZE7J4c",
-  authDomain: "fir-auth-9a259.firebaseapp.com",
-  projectId: "fir-auth-9a259",
-  storageBucket: "fir-auth-9a259.appspot.com",
-  messagingSenderId: "68322339636",
-  appId: "1:68322339636:web:85082ef168f17f5f62d361"
+  apiKey: "",
+  authDomain: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: ""
 };
 
 
